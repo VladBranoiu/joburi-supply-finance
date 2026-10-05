@@ -1,0 +1,34 @@
+name: Actualizare anunțuri
+
+on:
+  schedule:
+    - cron: "10 4 * * *"  # zilnic la 07:10 ora României (vara) / 06:10 (iarna)
+  workflow_dispatch:       # buton „Run workflow” pentru rulare manuală
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actualizare
+  cancel-in-progress: false
+
+jobs:
+  actualizare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # colectorul prinde singur erorile fiecărei surse; dacă pică tot, pagina rămâne cu datele de ieri
+      # OLX blochează serverele GitHub: el se ia de pe PC (sincronizare-olx.sh)
+      - name: Adună anunțurile
+        run: python3 colector.py ejobs bestjobs linkedin edujobs posturi anofm hipo recenzii
+      - name: Salvează datele
+        run: |
+          git config user.name "actualizare-automata"
+          git config user.email "actions@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Anunțuri actualizate $(date -u +%Y-%m-%d)"
+          git push

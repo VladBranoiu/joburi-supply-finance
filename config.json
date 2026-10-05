@@ -1,0 +1,77 @@
+{
+  "curs_eur_ron": 5.05,
+  "zone": {
+    "_explicatie": "Toate localitățile sunt din județul Brașov. bonus = puncte în plus pentru un job din zona respectivă; mută localitățile dintr-o listă în alta după cum îți convine (o localitate necunoscută din județ intră la „Restul județului”)",
+    "brasov": {
+      "eticheta": "Brașov și împrejurimi",
+      "bonus": 10,
+      "localitati": [
+        "Brașov", "Poiana Brașov", "Săcele", "Codlea", "Ghimbav", "Cristian", "Sânpetru", "Hărman", "Bod",
+        "Colonia Bod", "Hălchiu", "Satu Nou", "Feldioara", "Rotbav", "Prejmer", "Lunca Câlnicului",
+        "Stupinii Prejmerului", "Tărlungeni", "Purcăreni", "Zizin", "Cărpiniș", "Budila", "Vulcan", "Râșnov",
+        "Predeal", "Pârâul Rece", "Timișu de Jos", "Timișu de Sus", "Dârste", "Stupini", "Satulung", "Baciu",
+        "Turcheș", "Cernatu", "Dumbrăvița", "Vlădeni", "Crizbav", "Zărnești", "Tohanu Nou", "Bran", "Șimon",
+        "Predeluț", "Sohodol", "Teliu", "Holbav"
+      ]
+    },
+    "judet": {
+      "eticheta": "Restul județului",
+      "bonus": 4,
+      "localitati": [
+        "Făgăraș", "Victoria", "Rupea", "Moieciu", "Moieciu de Jos", "Fundata", "Poiana Mărului", "Apața",
+        "Augustin", "Beclean", "Bunești", "Cața", "Cincu", "Comana", "Drăguș", "Hârseni", "Hoghiz", "Homorod",
+        "Jibert", "Lisa", "Măieruș", "Mândra", "Ormeniș", "Părău", "Racoș", "Recea", "Sâmbăta de Sus",
+        "Șercaia", "Șinca", "Șinca Nouă", "Șinca Veche", "Șoarș", "Ticușu", "Ucea", "Ucea de Jos", "Ungra",
+        "Vama Buzăului", "Viștea", "Voila", "Mărgineni", "Dejani"
+      ]
+    }
+  },
+  "limbi_straine_cunoscute": {
+    "_explicatie": "limbile străine pe care le știi (engleza, germana, franceza, italiana, spaniola…); joburile care cer altă limbă primesc puncte în minus",
+    "limbi": ["engleza"]
+  },
+  "firme_preferate": [
+    "ey",
+    "ernst & young",
+    "pwc",
+    "pricewaterhousecoopers",
+    "deloitte",
+    "kpmg",
+    "bdo",
+    "mazars",
+    "grant thornton",
+    "rsm",
+    "baker tilly",
+    "crowe",
+    "schaeffler",
+    "autoliv",
+    "preh",
+    "stabilus",
+    "airbus",
+    "premium aerotec",
+    "draxlmaier",
+    "siemens",
+    "freudenberg",
+    "benchmark"
+  ],
+  "recenzii_potrivire_manuala": {
+    "_explicatie": "nume firmă din anunț -> id UndeLucram (număr) sau \"nu\" dacă potrivirea automată e greșită"
+  },
+  "google_places_api_key": "",
+  "cuvinte_cautare": {
+    "bestjobs": [
+      "supply chain", "planner", "planificator", "logistica", "logistics", "achizitii", "procurement", "buyer",
+      "comercial", "commercial", "contabil", "accountant", "accounts payable", "accounts receivable",
+      "general ledger", "financiar", "finance", "controller", "economist", "facturare", "audit", "auditor"
+    ],
+    "bestjobs_locatii": ["brasov"],
+    "linkedin": [
+      "supply chain", "supply planner", "demand planner", "material planner", "production planner", "logistics",
+      "logistica", "inventory", "procurement", "buyer", "achizitii", "commercial", "comercial", "accounts payable",
+      "accounts receivable", "general ledger", "accountant", "contabil", "financial analyst", "finance",
+      "controller", "billing", "credit controller", "audit", "auditor", "assurance"
+    ],
+    "linkedin_locatii": ["Brașov, Romania", "Făgăraș, Romania"]
+  },
+  "pauza_intre_cereri_sec": 0.7
+}
