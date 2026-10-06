@@ -82,8 +82,9 @@ MyJob are acum aproape numai joburi în străinătate, iar Talent.com nu avea ni
 - Site: https://vladbranoiu.github.io/joburi-supply-finance/ (GitHub Pages, din branch-ul `main`).
 - **GitHub Actions** (`.github/workflows/actualizare.yml`) rulează zilnic la 04:10 UTC: eJobs, BestJobs, LinkedIn, EduJobs,
   posturi.gov.ro, ANOFM, Hipo și recenziile. Se poate porni și manual din tabul Actions → „Actualizare anunțuri” → Run workflow.
-- **OLX blochează serverele GitHub**, așa că el se actualizează de pe PC: sarcina Windows „Joburi supply-finance - OLX”
-  (zilnic la 10:10 și la logare) rulează `sincronizare-olx.sh` într-o copie separată (`~/.local/share/joburi-supply-finance-sync`).
-  Jurnal: `~/.local/share/joburi-supply-finance-sync.log`. Dacă PC-ul stă oprit, anunțurile OLX dispar treptat în 14 zile
+- **OLX blochează serverele GitHub, iar eJobs le refuză des** (HTTP 403), așa că amândouă se iau și de pe PC: sarcina Windows
+  „Joburi supply-finance - OLX” (zilnic la 10:10 și la logare) rulează `sincronizare-olx.sh` într-o copie separată
+  (`~/.local/share/joburi-supply-finance-sync`). Jurnal: `~/.local/share/joburi-supply-finance-sync.log`.
+  Dacă PC-ul stă oprit, anunțurile OLX (și cele eJobs, când pică și pe GitHub) dispar treptat în 14 zile
   (sau la data lor de expirare), iar restul merge normal.
 - Înainte să modifici ceva local: `git pull` (datele se schimbă zilnic pe GitHub).

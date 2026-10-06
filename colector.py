@@ -735,26 +735,29 @@ def sursa_ejobs():
     nivele = {c["id"]: c["name"] for c in statics["careerLevels"]}
     limbi = {c["id"]: fara_diacritice(c["name"]) for c in statics["languages"]}
     judet = 9  # Brașov
-    # API-ul dă puține rezultate pe căutare, așa că împărțim pe departamente și cuvinte cheie
+    # API-ul dă puține rezultate pe căutare, așa că împărțim pe cuvinte cheie și departamente
     # (41 Achiziții, 24 Administrativ / Logistică, 71 Audit / Consultanță, 59 Financiar / Contabilitate,
     #  47 Import - export, 40 Transport / Distribuție, 5 Vânzări, 10 Office / Back-office, 60 Bănci, 46 Statistică)
-    cautari = [f"filters.departments={d}" for d in (41, 24, 71, 59, 47, 40, 5, 10, 60, 46)] + [
-        "q=" + urllib.parse.quote(k) for k in (
-            "supply", "planner", "planificator", "logistic", "achizitii", "procurement", "buyer", "comercial",
-            "commercial", "contabil", "accountant", "financiar", "finance", "controller", "economist", "facturare",
-            "accounts payable", "accounts receivable", "general ledger", "credit", "audit", "auditor", "analyst",
-            "analist")]
+    cautari = ["q=" + urllib.parse.quote(k) for k in (
+        "supply", "planner", "planificator", "logistic", "achizitii", "procurement", "buyer", "comercial",
+        "commercial", "contabil", "accountant", "financiar", "finance", "controller", "economist", "facturare",
+        "accounts payable", "accounts receivable", "general ledger", "credit", "audit", "auditor", "analyst",
+        "analist")] + [f"filters.departments={d}" for d in (41, 24, 71, 59, 47, 40, 5, 10, 60, 46)]
 
-    vazute, rezultate = set(), []
+    vazute, rezultate, erori = set(), [], []
     for extra in cautari:
         page = 1
         while page <= 10:
             try:
                 d = fetch(f"{api}/jobs?page={page}&pageSize=50&{extra}&filters.counties={judet}",
-                          retries=0 if page > 1 else 2)
-            except Exception:  # noqa: BLE001 - API-ul dă 404 după ultima pagină
+                          retries=0 if page > 1 else 1)
+            except Exception as e:  # noqa: BLE001 - API-ul dă 404 după ultima pagină
                 if page == 1:
-                    raise
+                    # de pe serverele GitHub eJobs refuză uneori câte o căutare (403): trecem la următoarea,
+                    # dar dacă primele trei pică toate, e blocat de tot
+                    erori.append(str(e))
+                    if len(erori) >= 3 and not vazute:
+                        raise
                 break
             for j in d.get("jobs", []):
                 if j["id"] in vazute:
@@ -771,6 +774,8 @@ def sursa_ejobs():
             if not d.get("morePagesFollow"):
                 break
             page += 1
+    if erori:
+        print(f"   ! eJobs: {len(erori)} căutări din {len(cautari)} au eșuat ({erori[-1][:70]})")
     print(f"   eJobs: {len(vazute)} anunțuri văzute, {len(rezultate)} potrivite în județul Brașov")
 
     joburi = []

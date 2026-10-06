@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: "3.12"
       # colectorul prinde singur erorile fiecărei surse; dacă pică tot, pagina rămâne cu datele de ieri
-      # OLX blochează serverele GitHub: el se ia de pe PC (sincronizare-olx.sh)
+      # OLX blochează serverele GitHub: el se ia de pe PC (sincronizare-olx.sh), împreună cu eJobs, care le refuză des
       - name: Adună anunțurile
         run: python3 colector.py ejobs bestjobs linkedin edujobs posturi anofm hipo recenzii
       - name: Salvează datele
